@@ -81,7 +81,7 @@ export default function OverviewAppView() {
         setArticles(articlesData);
       }
     } catch (error) {
-      console.error('Error uploading image::::', error);
+      console.error('Error uploading image:::::', error);
     }
   };
 
