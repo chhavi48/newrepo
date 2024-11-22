@@ -140,6 +140,9 @@ const QuizComponentView: React.FC = () => {
             <br />- Select the correct answer from the options provided.
             <br />- Submit your quiz at the end to see your score.
           </Typography>
+          <Typography variant="h6" sx={{ mb: 4, color: "#2d88c3" }}>
+            The quiz is organized by Himanshu.
+        </Typography>
           <Button variant="contained" onClick={fetchQuestions}>
             Start Quiz
           </Button>
