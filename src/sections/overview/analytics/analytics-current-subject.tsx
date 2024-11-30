@@ -23,7 +23,6 @@ const StyledChart = styled(Chart)(({ theme }) => ({
   },
 }));
 
-// ----------------------------------------------------------------------
 
 interface Props extends CardProps {
   title?: string;
@@ -66,16 +65,13 @@ export default function AnalyticsCurrentSubject({ title, subheader, chart, ...ot
       },
     },
     yaxis: {
-      show: false,  // Hide the numbers on the axes
+      show: false, 
     },
     ...options,
   });
 
 
   return (
-    <>
-      {/* <CardHeader title={title} subheader={subheader} sx={{ mb: 1 }} /> */}
-
       <StyledChart
         dir="ltr"
         type="radar"
@@ -84,6 +80,5 @@ export default function AnalyticsCurrentSubject({ title, subheader, chart, ...ot
         width="100%"
         height={240}
       />
-    </>
   );
 }

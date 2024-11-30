@@ -81,11 +81,11 @@ export function useNavData() {
       {
         subheader: t('management'),
         items: [
-          {
-            title: t('Quiz'),
-            path: paths.dashboard.quizComponent,
-            icon: ICONS.blog,
-          },
+          // {
+          //   title: t('Quiz'),
+          //   path: paths.dashboard.quizComponent,
+          //   icon: ICONS.blog,
+          // },
           {
             title: t('Placement Journal'),
             path: paths.dashboard.post.root,

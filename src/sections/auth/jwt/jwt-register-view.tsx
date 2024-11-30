@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -20,7 +19,7 @@ import { useRouter, useSearchParams } from 'src/routes/hooks';
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import Iconify from 'src/components/iconify';
-import FormProvider, { RHFSelect, RHFTextField } from 'src/components/hook-form';
+import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -46,8 +45,8 @@ export default function JwtRegisterView() {
     email: '',
     password: '',
     studentId: '',
-    phone: '91', // Default value with "+91"
-    type: 'student'
+    phone: '+91', // Default value with "+91"
+    type: 'student',
   };
 
   const methods = useForm({
@@ -71,7 +70,7 @@ export default function JwtRegisterView() {
           password: data.password,
           studentId: data.studentId,
           phone: data.phone,
-          type: data.type,
+          type: 'student',
           // wantToBe: data.wantToBe
         },
         {
@@ -128,7 +127,18 @@ export default function JwtRegisterView() {
       {/* Phone Number field with default +91 */}
       <RHFTextField
         name="phone"
-        label="Phone Number"
+        // label="Phone Number"
+        // InputProps={{
+        //   startAdornment: <InputAdornment position="start">+91</InputAdornment>,
+        // }}
+        onChange={(e) => {
+          const value = e.target.value || ''; // Ensure `value` is a string
+          // Enforce "+91" prefix
+          if (!value.startsWith('+91')) {
+            e.target.value = `+91${value.replace('+91', '')}`;
+          }
+          methods.setValue('phone', e.target.value); // Sync with Form state
+        }}
         onFocus={(e) => {
           if (!e.target.value.startsWith('+91')) {
             e.target.value = `+91${e.target.value}`;
@@ -136,13 +146,20 @@ export default function JwtRegisterView() {
         }}
       />
 
-      <RHFSelect name="type" label="User Type">
+      {/* <RHFSelect name="type" label="User Type">
         <MenuItem value="student">Student</MenuItem>
         <MenuItem value="trainer">Trainer</MenuItem>
-      </RHFSelect>
+      </RHFSelect> */}
       {/* <RHFTextField name="wantToBe" label="Want To Be" /> */}
 
-      <LoadingButton fullWidth color="inherit" size="large" type="submit" variant="contained" loading={isSubmitting}>
+      <LoadingButton
+        fullWidth
+        color="inherit"
+        size="large"
+        type="submit"
+        variant="contained"
+        loading={isSubmitting}
+      >
         Create account
       </LoadingButton>
     </Stack>

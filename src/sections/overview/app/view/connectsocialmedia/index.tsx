@@ -44,10 +44,10 @@ const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...o
   const [repos, setRepos] = useState<Repo[]>([]);
   const [showGitHubButton, setShowGitHubButton] = useState(true);
 
+  console.log(accessToken)
+
   const handleProjectDialogOpen = () => setProjectDialogOpen(true);
   const handleProjectDialogClose = () => setProjectDialogOpen(false);
-
-  console.log(accessToken);
 
   const handleSocialMediaDialogOpen = useCallback((name: string) => {
     setSocialMediaName(name);
@@ -111,17 +111,21 @@ const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...o
     window.location.href = `${HOST_API}/auth/github/github`;
   };
 
-  // const handleLogout = useCallback(() => {
-  //   setAccessToken(null);
-  //   setUserData(null);
-  //   setRepos([]);
-  //   localStorage.removeItem('githubtoken');
-  //   window.history.replaceState({}, document.title, "/");
-  // }, []);
-
   const renderSocialMediaButton = (platform: string, icon: string, color: string) => (
-    <Fab sx={{ borderRadius: '10px' }} color="default" variant="extended" onClick={() => handleSocialMediaDialogOpen(platform)}>
-      <Iconify icon={icon} width={24} />
+    <Fab
+      sx={{
+        borderRadius: '10px',
+        backgroundColor: '#00a76f',
+        color: 'white',
+        '&:hover': {
+          backgroundColor: '#008c5c',
+        },
+      }}
+      color="default"
+      variant="extended"
+      onClick={() => handleSocialMediaDialogOpen(platform)}
+    >
+      <Iconify icon={icon} width={24} sx={{ marginRight: 1 }} />
       {platform}
     </Fab>
   );
@@ -184,16 +188,35 @@ const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...o
             {renderSocialMediaButton('LinkedIn', 'eva:linkedin-fill', '#0077B5')}
             {renderSocialMediaButton('Twitter', 'eva:twitter-fill', '#1DA1F2')}
             {showGitHubButton && (
-              // <Fab sx={{ backgroundColor: '#333', color: 'white' }} onClick={handleAuth}>
-              //   <Iconify icon="eva:github-fill" width={24} />
-              // </Fab>
-              <Fab sx={{ borderRadius: '10px' }} color="default" variant="extended" onClick={handleAuth}>
-                <Iconify icon="eva:github-fill" width={24} />
+              <Fab
+                sx={{
+                  borderRadius: '10px',
+                  backgroundColor: '#00a76f',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: '#008c5c',
+                  },
+                }}
+                variant="extended"
+                onClick={handleAuth}
+              >
+                <Iconify icon="eva:github-fill" width={24} sx={{ marginRight: 1 }} />
                 Github
               </Fab>
             )}
-            <Fab sx={{ borderRadius: '10px' }} color="default" variant="extended" onClick={handleProjectDialogOpen}>
-              <Iconify icon="eva:folder-add-outline" width={24} />
+            <Fab
+              sx={{
+                borderRadius: '10px',
+                backgroundColor: '#00a76f',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: '#008c5c',
+                },
+              }}
+              variant="extended"
+              onClick={handleProjectDialogOpen}
+            >
+              <Iconify icon="eva:folder-add-outline" width={24} sx={{ marginRight: 1 }} />
               Add Projects
             </Fab>
           </Grid>
@@ -203,13 +226,22 @@ const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...o
               <Box sx={{ flexGrow: 1 }}>
                 <CardHeader title="Github" sx={{ color: 'white' }} />
                 {userData?.login && (
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', width: '90%', mt: 3, ml: 1 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      overflow: 'hidden',
+                      width: '90%',
+                      mt: 3,
+                      ml: 1,
+                    }}
+                  >
                     <GitHubCalendar
                       username={userData.login}
                       blockSize={8}
                       blockMargin={4}
                       fontSize={12}
-                    // width={8000}
                     />
                   </Box>
                 )}
