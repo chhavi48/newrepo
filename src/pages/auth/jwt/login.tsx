@@ -1,4 +1,4 @@
-import { JwtLoginView } from 'src/sections/auth/jwt';
+import HomePage from 'src/pages/home';
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,8 @@ export default function LoginPage() {
         <title> Jwt: Login</title>
       </Helmet> */}
 
-      <JwtLoginView />
+      {/* <JwtLoginView /> */}
+      <HomePage/>
     </>
   );
 }

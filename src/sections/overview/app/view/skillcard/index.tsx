@@ -24,9 +24,10 @@ import QuizComponent from '../quiz/quiz';
 interface Props extends CardProps {
   title: string;
   skillsArray: any;
+  onSkillsUpdated: () => void;
 }
 
-export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
+export default function SkillCard({ title, skillsArray,onSkillsUpdated, sx, ...other }: Props) {
   const [open, setOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [newSkill, setNewSkill] = useState('');
@@ -36,8 +37,6 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
 
   const theme = useTheme();
   console.log(quizCompleted);
-
-  // Function to handle opening the dialog and fetching suggested skills
   const handleClickOpen = async () => {
     setOpen(true);
 
@@ -59,7 +58,7 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
   const handleClose = () => {
     setOpen(false);
     setQuizOpen(false);
-    setDeleteSkill(null); // Close delete confirmation dialog
+    setDeleteSkill(null); 
   };
 
   const handleAddSkill = () => {
@@ -90,12 +89,16 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
         skillsArray.push({ skill_name: newSkill, score });
 
         setNewSkill('');
+
+        // Notify parent about the skill update
+        if (typeof onSkillsUpdated === 'function') {
+          onSkillsUpdated();
+        }
       })
       .catch((error) => {
         console.error('Error adding skill:', error);
       });
   };
-
   const handleDeleteSkill = (skillName: string) => {
     setDeleteSkill(skillName); // Set the skill to be deleted and open confirmation dialog
   };
@@ -146,7 +149,6 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
       <Card sx={{ display: 'flex', height: 320, mt: 1, ...sx }} {...other}>
         <Box sx={{ flexGrow: 1 }}>
           <CardHeader title={title} />
-
           <Grid
             container
             sx={{
@@ -173,15 +175,36 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
                       onDelete={() => handleDeleteSkill(skill?.skill_name)}
                     />
                   ))}
-                  <Chip variant="outlined" label={skillsArray?.length > 0 ? "Add Other" : "Add Skills"} color="warning" onClick={handleClickOpen} />
+                  <Chip
+                    variant="outlined"
+                    label={skillsArray?.length > 0 ? 'Add Other' : 'Add Skills'}
+                    color="warning"
+                    onClick={handleClickOpen}
+                  />
                 </Grid>
               </Box>
             </Grid>
             <Grid item md={5} lg={5} xs={12}>
-              <AnalyticsCurrentSubject
-                title="Skill Analytics"
-                chart={chartData}
-              />
+              {skillsArray?.length > 2 ? (
+                <AnalyticsCurrentSubject title="Skill Analytics" chart={chartData} />
+              ) : (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 240,
+                    borderRadius: 2,
+                    p: 3,
+                    textAlign: 'center',
+                  }}
+                >
+                  <Box>
+                    <strong>Add more than 3 skills to view the skill radar chart.</strong>
+                  </Box>
+                </Box>
+              )}
             </Grid>
           </Grid>
         </Box>
@@ -191,7 +214,8 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
         <DialogTitle>Add a New Skill</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please enter the name of the new skill you want to add, or select from the suggested skills.
+            Please enter the name of the new skill you want to add, or select from the suggested
+            skills.
           </DialogContentText>
 
           <TextField
@@ -238,7 +262,9 @@ export default function SkillCard({ title, skillsArray, sx, ...other }: Props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={confirmDelete} color="error">Delete</Button>
+          <Button onClick={confirmDelete} color="error">
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
 

@@ -1,11 +1,8 @@
-import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
+import { Avatar } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import { Avatar, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
-
-import { useResponsive } from 'src/hooks/use-responsive';
 
 import { bgGradient } from 'src/theme/css';
 
@@ -19,7 +16,7 @@ type Props = {
 
 export default function AuthClassicLayout({ children, image, title }: Props) {
   const theme = useTheme();
-  const mdUp = useResponsive('up', 'md');
+  // const mdUp = useResponsive('up', 'md');
 
   const renderLogo = (
     <Avatar
@@ -28,32 +25,16 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       sx={{
         zIndex: 9,
         position: 'absolute',
-        m: { xs: 2, md: 5 },
+        top: { xs: 16, md: 32 },
+        left: { xs: 16, md: 32 },
+        width: { xs: 48, md: 64 },
+        height: { xs: 48, md: 64 },
       }}
     />
   );
 
-  const renderContent = (
-    <Stack
-      sx={{
-        width: 1,
-        mx: 'auto',
-        maxWidth: 480,
-        px: { xs: 2, md: 8 },
-        pt: { xs: 15, md: 20 },
-        pb: { xs: 15, md: 0 },
-      }}
-    >
-      {children}
-    </Stack>
-  );
-
-  const renderSection = (
-    <Stack
-      flexGrow={1}
-      spacing={10}
-      alignItems="center"
-      justifyContent="center"
+  const renderBackground = (
+    <Box
       sx={{
         ...bgGradient({
           color: alpha(
@@ -62,51 +43,48 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
           ),
           imgUrl: '/assets/background/overlay_2.jpg',
         }),
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+      }}
+    />
+  );
+
+  const renderContent = (
+    <Stack
+      alignItems="center"
+      justifyContent="center"
+      sx={{
+        width: 1,
+        minHeight: '100vh',
+        px: 2,
+        py: { xs: 5, md: 10 },
       }}
     >
       <Box
-        component="img"
-        alt="auth"
-        src={image || '/assets/illustrations/illustration_dashboard.png'}
         sx={{
-          maxWidth: {
-            xs: 380,
-            lg: 460,
-            xl: 620,
-          },
+          maxWidth: 480,
+          width: '100%',
+          bgcolor: 'background.paper',
+          borderRadius: 2,
+          boxShadow: 3,
+          p: { xs: 3, md: 5 },
+          textAlign: 'center',
         }}
-      />
-
-      {/* Add the links here */}
-      <Stack direction="column" spacing={1} alignItems="center">
-        <Typography sx={{ color: "#0e8562", fontSize: "15px" }} component="div">
-          <Link to="/about-us-page" style={{ color: "#0e8562" }}>About Us</Link> |
-          <Link to="/our-mission" style={{ color: "#0e8562" }}> Mission</Link> |
-          <Link to="/our-vision" style={{ color: "#0e8562" }}> Vision</Link>
-        </Typography>
-        {/* <Typography sx={{ color: "white" }} variant="caption" component="div">
-          <Link to="/our-mission" style={{ color: "white" }}>Mission</Link>
-        </Typography>
-        <Typography sx={{ color: "white" }} variant="caption" component="div">
-          <Link to="/our-vision" style={{ color: "white" }}>Vision</Link>
-        </Typography> */}
-      </Stack>
+      >
+        {children}
+      </Box>
     </Stack>
   );
 
   return (
-    <Stack
-      component="main"
-      direction="row"
-      sx={{
-        minHeight: '100vh',
-      }}
-    >
+    <Box sx={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+      {renderBackground}
       {renderLogo}
-
-      {mdUp && renderSection}
-
       {renderContent}
-    </Stack>
+    </Box>
   );
 }
