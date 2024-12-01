@@ -22,6 +22,7 @@ interface SocialMediaLink {
 interface Props extends CardProps {
   title: string;
   socialMediaLinks: SocialMediaLink[];
+  getUserDetails: () => void;
 }
 
 interface Repo {
@@ -34,7 +35,13 @@ interface Repo {
   forks_count: number;
 }
 
-const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...other }) => {
+const ConnectSocialMedia: React.FC<Props> = ({
+  title,
+  socialMediaLinks,
+  getUserDetails,
+  sx,
+  ...other
+}) => {
   const theme = useTheme();
   const [projectDialogOpen, setProjectDialogOpen] = useState(false);
   const [socialMediaDialogOpen, setSocialMediaDialogOpen] = useState(false);
@@ -44,24 +51,28 @@ const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...o
   const [repos, setRepos] = useState<Repo[]>([]);
   const [showGitHubButton, setShowGitHubButton] = useState(true);
 
-  console.log(accessToken)
+  console.log(accessToken);
 
   const handleProjectDialogOpen = () => setProjectDialogOpen(true);
   const handleProjectDialogClose = () => setProjectDialogOpen(false);
 
-  const handleSocialMediaDialogOpen = useCallback((name: string) => {
+  const handleSocialMediaDialogOpen = (name: string) => {
     setSocialMediaName(name);
+    // getUserDetails();
     setSocialMediaDialogOpen(true);
-  }, []);
+  };
 
   const handleSocialMediaDialogClose = useCallback(() => {
     setSocialMediaDialogOpen(false);
     setSocialMediaName('');
   }, []);
 
-  const handleAddUrl = useCallback((url: string) => {
-    console.log(`Adding URL for ${socialMediaName}: ${url}`);
-  }, [socialMediaName]);
+  const handleAddUrl = useCallback(
+    (url: string) => {
+      console.log(`Adding URL for ${socialMediaName}: ${url}`);
+    },
+    [socialMediaName]
+  );
 
   const fetchGitHubUserData = useCallback(async (token: string) => {
     try {
@@ -258,6 +269,7 @@ const ConnectSocialMedia: React.FC<Props> = ({ title, socialMediaLinks, sx, ...o
 
       <AddProjectDialog open={projectDialogOpen} onClose={handleProjectDialogClose} />
       <AddSocialMediaDialog
+        getUserDetails={getUserDetails}
         open={socialMediaDialogOpen}
         onClose={handleSocialMediaDialogClose}
         socialMediaName={socialMediaName}

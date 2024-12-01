@@ -25,9 +25,10 @@ interface Props extends CardProps {
   title: string;
   skillsArray: any;
   onSkillsUpdated: () => void;
+  getUserDetails:()=>void;
 }
 
-export default function SkillCard({ title, skillsArray,onSkillsUpdated, sx, ...other }: Props) {
+export default function SkillCard({ title, skillsArray,getUserDetails, onSkillsUpdated, sx, ...other }: Props) {
   const [open, setOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [newSkill, setNewSkill] = useState('');
@@ -58,7 +59,7 @@ export default function SkillCard({ title, skillsArray,onSkillsUpdated, sx, ...o
   const handleClose = () => {
     setOpen(false);
     setQuizOpen(false);
-    setDeleteSkill(null); 
+    setDeleteSkill(null);
   };
 
   const handleAddSkill = () => {
@@ -111,13 +112,14 @@ export default function SkillCard({ title, skillsArray,onSkillsUpdated, sx, ...o
         .delete(`/users/skills/${deleteSkill}`, {
           headers: {
             'Content-Type': 'application/json',
-            'Auth-Token': `${localStorage.getItem('auth-token')}`,
+            'Auth-Token': `${localStorage.getItem('auth-token')}`, // Ensure token is passed for authentication
           },
         })
         .then((response) => {
-          console.log('Skill deleted:', response.data);
-          setSuggestedSkills(updatedSkills); // Update local state
+          console.log('Skill deleted successfully:', response.data);
+          setSuggestedSkills(updatedSkills); // Update local state to remove the skill
           setDeleteSkill(null); // Close confirmation dialog
+          getUserDetails()
         })
         .catch((error) => {
           console.error('Error deleting skill:', error);
