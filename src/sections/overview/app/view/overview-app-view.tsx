@@ -62,7 +62,7 @@ export default function OverviewAppView() {
       if (user.skills && user.skills.length > 0) {
         // Extract skill names
         const skillsString = user.skills
-          .map((skill: { skill_name: any; }) => skill.skill_name) // Get the skill_name from each object
+          .map((skill: { skill_name: any }) => skill.skill_name) // Get the skill_name from each object
           .join(', '); // Join them into a single string
 
         console.log(skillsString, 'skillssss'); // Debugging log
@@ -82,10 +82,12 @@ export default function OverviewAppView() {
         );
 
         // Extract and set articles
-        const articlesData = feedResponse?.data?.articles.map((article: { title: any; link: any; }) => ({
-          title: article.title,
-          link: article.link,
-        }));
+        const articlesData = feedResponse?.data?.articles.map(
+          (article: { title: any; link: any }) => ({
+            title: article.title,
+            link: article.link,
+          })
+        );
 
         setArticles(articlesData);
       }
@@ -141,12 +143,14 @@ export default function OverviewAppView() {
             socialMediaLinks={userData?.socialMediaLinks || []} // Pass social media links here
           />
           <SkillCard
+            getUserDetails={getUserDetails}
             onSkillsUpdated={refreshArticles}
             skillsArray={userData?.skills}
             title="Skills"
           />
 
           <ConnectSocialMedia
+            getUserDetails={getUserDetails}
             title="Proof of Work"
             socialMediaLinks={userData?.socialMediaLinks || []}
           />

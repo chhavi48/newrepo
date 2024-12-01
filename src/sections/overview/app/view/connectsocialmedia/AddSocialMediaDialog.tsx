@@ -15,6 +15,7 @@ interface AddSocialMediaDialogProps {
   onClose: () => void;
   socialMediaName: string;
   onAdd: (link: string) => void;
+  getUserDetails: () => void;
 }
 
 const AddSocialMediaDialog: React.FC<AddSocialMediaDialogProps> = ({
@@ -22,6 +23,7 @@ const AddSocialMediaDialog: React.FC<AddSocialMediaDialogProps> = ({
   onClose,
   socialMediaName,
   onAdd,
+  getUserDetails
 }) => {
   const [link, setlink] = useState('');
 
@@ -41,7 +43,7 @@ const AddSocialMediaDialog: React.FC<AddSocialMediaDialogProps> = ({
         throw new Error('Failed to update social media link');
       }
       // Uncomment if you have a function to get user details
-      // getUserDetails();
+      getUserDetails();
       onClose();
       setlink('');
       // Uncomment if you have a function to show success message
