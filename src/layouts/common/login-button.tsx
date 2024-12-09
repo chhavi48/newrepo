@@ -1,20 +1,29 @@
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import { Theme, SxProps } from '@mui/material/styles';
-
-import { RouterLink } from 'src/routes/components';
-
-import { PATH_AFTER_LOGIN } from 'src/config-global';
-
-// ----------------------------------------------------------------------
 
 type Props = {
   sx?: SxProps<Theme>;
 };
 
 export default function LoginButton({ sx }: Props) {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate('/login-page'); // Navigate to the JWT login page
+  };
+  const handleSignUpClick = () => {
+    navigate('/auth/jwt/register'); // Navigate to the
+  };
+
   return (
-    <Button component={RouterLink} href={PATH_AFTER_LOGIN} variant="outlined" sx={{ mr: 1, ...sx }}>
-      Login
-    </Button>
+    <>
+      <Button variant="outlined" sx={{ mr: 1, ...sx }} onClick={handleSignUpClick}>
+        SignUp
+      </Button>
+      <Button variant="outlined" sx={{ mr: 1, ...sx }} onClick={handleLoginClick}>
+        Login
+      </Button>
+    </>
   );
 }

@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import AuthClassicLayout from 'src/layouts/auth/classic';
+
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 import { useRouter, useSearchParams } from 'src/routes/hooks';
@@ -23,7 +25,6 @@ import { PATH_AFTER_LOGIN, PATH_AFTER_LOGIN_ASTEACHER } from 'src/config-global'
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
-
 // ----------------------------------------------------------------------
 
 export default function JwtLoginView() {
@@ -61,12 +62,15 @@ export default function JwtLoginView() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data, "datatype");
+    console.log(data, 'datatype');
     try {
       await login?.(data.email, data.password);
 
       // Determine redirect path based on user type
-      const redirectPath = localStorage.getItem('userType') === 'trainer' ? PATH_AFTER_LOGIN_ASTEACHER : (returnTo || PATH_AFTER_LOGIN);
+      const redirectPath =
+        localStorage.getItem('userType') === 'trainer'
+          ? PATH_AFTER_LOGIN_ASTEACHER
+          : returnTo || PATH_AFTER_LOGIN;
 
       router.push(redirectPath);
     } catch (error) {
@@ -75,7 +79,6 @@ export default function JwtLoginView() {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
-
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
@@ -110,7 +113,6 @@ export default function JwtLoginView() {
         }}
       />
 
-
       {/* <Link variant="body2" color="inherit" underline="always" sx={{ alignSelf: 'flex-end' }}>
         Forgot password?
       </Link> */}
@@ -129,7 +131,7 @@ export default function JwtLoginView() {
   );
 
   return (
-    <>
+    <AuthClassicLayout>
       {renderHead}
 
       {/* <Alert severity="info" sx={{ mb: 3 }}>
@@ -146,6 +148,6 @@ export default function JwtLoginView() {
         {renderForm}
       </FormProvider>
       <Footer />
-    </>
+    </AuthClassicLayout>
   );
 }
