@@ -7,8 +7,9 @@ import CompactLayout from 'src/layouts/compact';
 
 import { SplashScreen } from 'src/components/loading-screen';
 
-// ----------------------------------------------------------------------
+import { JwtLoginView } from 'src/sections/auth/jwt';
 
+// ----------------------------------------------------------------------
 export const HomePage = lazy(() => import('src/pages/home'));
 const Page500 = lazy(() => import('src/pages/500'));
 const Page403 = lazy(() => import('src/pages/403'));
@@ -102,4 +103,5 @@ export const mainRoutes = [
   { path: 'our-mission', element: <OurMissionPage /> },
   { path: 'about-us-page', element: <AboutUsPage /> },
   { path: 'our-vision', element: <OurVisionPage /> },
+  { path: 'login-page', element: <JwtLoginView /> },
 ];

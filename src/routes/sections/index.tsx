@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import LoginPage from 'src/pages/auth/jwt/login';
-import AuthClassicLayout from 'src/layouts/auth/classic';
+// import AuthClassicLayout from 'src/layouts/auth/classic';
 
 // import { PATH_AFTER_LOGIN } from 'src/config-global';
 import { authRoutes } from './auth';
@@ -26,9 +26,9 @@ export default function Router() {
     {
       path: '/',
       element: (
-        <AuthClassicLayout>
-          <LoginPage />
-        </AuthClassicLayout>
+        // <AuthClassicLayout>
+        <LoginPage />
+        // </AuthClassicLayout>
       ),
     },
 

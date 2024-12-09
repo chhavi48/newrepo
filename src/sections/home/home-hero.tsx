@@ -1,247 +1,134 @@
-import { m, useScroll } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { Box, Grid, Button, Container, Typography } from '@mui/material';
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
+const HomePage = () => {
+  console.log('home');
+  return (
+    <Container maxWidth="lg" sx={{ py: 5 }}>
+      {/* Header Section */}
+      <Box sx={{ textAlign: 'center', mt: 10 }}>
+        <Typography variant="h3" gutterBottom>
+          Be the top 1%
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Create your portfolio the way companies want to see
+        </Typography>
+        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+          Try For Free
+        </Button>
+      </Box>
 
-import { useResponsive } from 'src/hooks/use-responsive';
+      {/* Boxes Row */}
+      {/* <Grid container spacing={2} justifyContent="center" sx={{ mt: 5 }}>
+        <Grid item xs={12} sm={4} md={3}>
+          <Paper
+            elevation={3}
+            sx={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            Box 1
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <Paper
+            elevation={3}
+            sx={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            Box 2
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <Paper
+            elevation={3}
+            sx={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            Box 3
+          </Paper>
+        </Grid>
+      </Grid> */}
 
-import { HEADER } from 'src/layouts/config-layout';
-import { bgBlur, bgGradient, textGradient } from 'src/theme/css';
+      {/* Story Section */}
+      <Grid container spacing={2} sx={{ justifyContent: 'center', mt: 4 }}>
+        <Grid md={8} lg={8} xs={12}>
+          <Box sx={{ textAlign: 'center', mb: 5, mt: 4 }}>
+            <Typography variant="h5" gutterBottom>
+              Our Story
+            </Typography>
+            <Typography variant="body1" color="textSecondary">
+              PropelX was born from a simple yet powerful realization: the disconnect between
+              academic training and real-world job requirements leaves countless talented
+              individuals underprepared for the workforce. Founded by a team of professionals with a
+              shared passion for innovation, education, and employability, PropelX aims to transform
+              how skills are built, validated, and presented. We envisioned a platform where
+              students are not just taught but equipped with tangible proof of their abilities,
+              making them job-ready from day one. By integrating AI, real-world projects, and
+              data-driven insights, PropelX bridges the gap between potential and performance,
+              offering value to students, colleges, and companies alike.
+            </Typography>
+          </Box>
 
-import { varFade, MotionContainer } from 'src/components/animate';
+          {/* Products Section */}
+          <Box sx={{ textAlign: 'center', mt: 5 }}>
+            <Typography variant="h5" gutterBottom>
+              Product
+            </Typography>
+            <Typography variant="body1" color="textSecondary" component="div">
+              <Box sx={{ textAlign: 'left', display: 'inline-block', margin: 'auto' }}>
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
+                    1. AI-Powered Learning:
+                  </Typography>{' '}
+                  PropelX designs personalized learning paths that adapt to individual skill levels
+                  and industry trends. - Put the personalised learning snapshot
+                </Box>
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
+                    2. Proof of Work:
+                  </Typography>{' '}
+                  Students showcase their skills through validated projects, offering employers
+                  tangible evidence of expertise. - Snapshot of project section
+                </Box>
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
+                    3. Pre-Vetted Talent Marketplace:
+                  </Typography>{' '}
+                  Companies access job-ready candidates, saving time and money in the recruitment
+                  process with our very own AI Agent.
+                </Box>
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
+                    4. Bridging Gaps:
+                  </Typography>{' '}
+                  We connect job seekers and employers on a unified platform, ensuring seamless
+                  collaboration.
+                </Box>
+                <Box>
+                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
+                    5. Future-Ready Workforce:
+                  </Typography>{' '}
+                  PropelX doesn’t just prepare individuals for jobs; it equips them to thrive in a
+                  rapidly evolving world. - Snapshot of overall profile. At PropelX, we don’t just
+                  create opportunities—we shape the future of employability.
+                </Box>
+              </Box>
+            </Typography>
+          </Box>
 
-// ----------------------------------------------------------------------
-
-const StyledRoot = styled('div')(({ theme }) => ({
-  ...bgGradient({
-    color: alpha(theme.palette.background.default, theme.palette.mode === 'light' ? 0.9 : 0.94),
-    imgUrl: '/assets/background/overlay_3.jpg',
-  }),
-  width: '100%',
-  height: '100vh',
-  position: 'relative',
-  [theme.breakpoints.up('md')]: {
-    top: 0,
-    left: 0,
-    position: 'fixed',
-  },
-}));
-
-const StyledWrapper = styled('div')(({ theme }) => ({
-  height: '100%',
-  overflow: 'hidden',
-  position: 'relative',
-  [theme.breakpoints.up('md')]: {
-    marginTop: HEADER.H_DESKTOP_OFFSET,
-  },
-}));
-
-const StyledTextGradient = styled(m.h1)(({ theme }) => ({
-  ...textGradient(
-    `300deg, ${theme.palette.primary.main} 0%, ${theme.palette.warning.main} 25%, ${theme.palette.primary.main} 50%, ${theme.palette.warning.main} 75%, ${theme.palette.primary.main} 100%`
-  ),
-  padding: 0,
-  marginTop: 8,
-  lineHeight: 1,
-  fontWeight: 900,
-  marginBottom: 24,
-  letterSpacing: 8,
-  textAlign: 'center',
-  backgroundSize: '400%',
-  fontSize: `${64 / 16}rem`,
-  fontFamily: theme.typography.fontSecondaryFamily,
-  [theme.breakpoints.up('md')]: {
-    fontSize: `${96 / 16}rem`,
-  },
-}));
-
-const StyledEllipseTop = styled('div')(({ theme }) => ({
-  top: -80,
-  width: 480,
-  right: -80,
-  height: 480,
-  borderRadius: '50%',
-  position: 'absolute',
-  filter: 'blur(100px)',
-  WebkitFilter: 'blur(100px)',
-  backgroundColor: alpha(theme.palette.primary.darker, 0.12),
-}));
-
-const StyledEllipseBottom = styled('div')(({ theme }) => ({
-  height: 400,
-  bottom: -200,
-  left: '10%',
-  right: '10%',
-  borderRadius: '50%',
-  position: 'absolute',
-  filter: 'blur(100px)',
-  WebkitFilter: 'blur(100px)',
-  backgroundColor: alpha(theme.palette.primary.darker, 0.12),
-}));
-
-type StyledPolygonProps = {
-  opacity?: number;
-  anchor?: 'left' | 'right';
+          {/* About Us Section */}
+          <Box sx={{ textAlign: 'center', mt: 5 }}>
+            <Typography variant="h5" gutterBottom>
+              About Us
+            </Typography>
+            <Typography variant="body1" color="textSecondary">
+              At PropelX, we’re revolutionizing how individuals upskill and prepare for the
+              workforce. By combining AI-powered personalized learning paths, real-world proof of
+              work, and a pre-vetted talent marketplace, we empower students and professionals to
+              excel in their careers. Our mission is to bridge the gap between education and
+              industry demands, creating a seamless connection between talent and opportunity.
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 };
 
-const StyledPolygon = styled('div')<StyledPolygonProps>(
-  ({ opacity = 1, anchor = 'left', theme }) => ({
-    ...bgBlur({
-      opacity,
-      color: theme.palette.background.default,
-    }),
-    zIndex: 9,
-    bottom: 0,
-    height: 80,
-    width: '50%',
-    position: 'absolute',
-    clipPath: 'polygon(0% 0%, 100% 100%, 0% 100%)',
-    ...(anchor === 'left' && {
-      left: 0,
-      ...(theme.direction === 'rtl' && {
-        transform: 'scale(-1, 1)',
-      }),
-    }),
-    ...(anchor === 'right' && {
-      right: 0,
-      transform: 'scaleX(-1)',
-      ...(theme.direction === 'rtl' && {
-        transform: 'scaleX(1)',
-      }),
-    }),
-  })
-);
-
-// ----------------------------------------------------------------------
-
-export default function HomeHero() {
-  const mdUp = useResponsive('up', 'md');
-
-
-
-  const heroRef = useRef<HTMLDivElement | null>(null);
-
-  const { scrollY } = useScroll();
-
-  const [percent, setPercent] = useState(0);
-
-
-  const getScroll = useCallback(() => {
-    let heroHeight = 0;
-
-    if (heroRef.current) {
-      heroHeight = heroRef.current.offsetHeight;
-    }
-
-    scrollY.on('change', (scrollHeight) => {
-      const scrollPercent = (scrollHeight * 100) / heroHeight;
-
-      setPercent(Math.floor(scrollPercent));
-    });
-  }, [scrollY]);
-
-  useEffect(() => {
-    getScroll();
-  }, [getScroll]);
-
-
-
-  const opacity = 1 - percent / 100;
-
-  const hide = percent > 120;
-
-  const renderDescription = (
-    <Stack
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        height: 1,
-        mx: 'auto',
-        maxWidth: 480,
-        opacity: opacity > 0 ? opacity : 0,
-        mt: {
-          md: `-${HEADER.H_DESKTOP + percent * 2.5}px`,
-        },
-      }}
-    >
-      <m.div variants={varFade().in}>
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-          }}
-        >
-          Start Your New Jorney with
-        </Typography>
-      </m.div>
-
-      <m.div variants={varFade().in}>
-        <StyledTextGradient
-          animate={{ backgroundPosition: '200% center' }}
-          transition={{
-            repeatType: 'reverse',
-            ease: 'linear',
-            duration: 20,
-            repeat: Infinity,
-          }}
-        >
-          Propelx
-        </StyledTextGradient>
-      </m.div>
-
-    
-    </Stack>
-  );
-
-  const renderPolygons = (
-    <>
-      <StyledPolygon />
-      <StyledPolygon anchor="right" opacity={0.48} />
-      <StyledPolygon anchor="right" opacity={0.48} sx={{ height: 48, zIndex: 10 }} />
-      <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} />
-    </>
-  );
-
-  const renderEllipses = (
-    <>
-      {mdUp && <StyledEllipseTop />}
-      <StyledEllipseBottom />
-    </>
-  );
-
-  return (
-    <>
-      <StyledRoot
-        ref={heroRef}
-        sx={{
-          ...(hide && {
-            opacity: 0,
-          }),
-        }}
-      >
-        <StyledWrapper>
-          <Container component={MotionContainer} sx={{ height: 1 }}>
-            <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
-              <Grid xs={12} md={6}>
-                {renderDescription}
-              </Grid>
-
-              {/* {mdUp && <Grid md={6}>{renderSlides}</Grid>} */}
-            </Grid>
-          </Container>
-
-          {renderEllipses}
-        </StyledWrapper>
-      </StyledRoot>
-
-      {mdUp && renderPolygons}
-
-      <Box sx={{ height: { md: '100vh' } }} />
-    </>
-  );
-}
+export default HomePage;

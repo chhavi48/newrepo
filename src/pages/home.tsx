@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------
 
-import { JwtLoginView } from 'src/sections/auth/jwt';
+// import { JwtLoginView } from 'src/sections/auth/jwt';
+import { HomeView } from 'src/sections/home/view';
 
 export default function HomePage() {
   return (
@@ -9,8 +10,8 @@ export default function HomePage() {
         <title> Minimal: The starting point for your next project</title>
       </Helmet> */}
 
-      {/* <HomeView /> */}
-      <JwtLoginView />
+      <HomeView />  
+      {/* <JwtLoginView /> */}
     </>
   );
 }
