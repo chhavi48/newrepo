@@ -20,7 +20,7 @@ export default function LoginButton({ sx }: Props) {
   return (
     <>
       <Button variant="outlined" sx={{ mr: 1, ...sx }} onClick={handleSignUpClick}>
-        SignUp
+        Sign Up
       </Button>
       <Button variant="outlined" sx={{ mr: 1, ...sx }} onClick={handleLoginClick}>
         Login

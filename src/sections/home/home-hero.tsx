@@ -1,7 +1,12 @@
 import { Box, Grid, Button, Container, Typography, Card, CardMedia } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 const HomePage = () => {
   console.log('homepage');
+  const navigate = useNavigate();
+  const handleLoginClick = () => {
+    navigate('/login-page');
+  };
   return (
     <Grid container sx={{ justifyContent: 'center' }}>
       <Grid item md={10} lg={10} xs={12}>
@@ -18,7 +23,7 @@ const HomePage = () => {
             <Typography variant="subtitle1" sx={{ mb: 3, color: 'text.secondary' }}>
               Create a portfolio that companies want to see
             </Typography>
-            <Button variant="contained" color="primary">
+            <Button onClick={handleLoginClick} variant="contained" color="primary">
               Try For Free
             </Button>
           </Box>
@@ -110,7 +115,6 @@ const HomePage = () => {
               About Us
             </Typography>
             <Grid container spacing={4} alignItems="center">
-            
               <Grid item xs={12} md={12}>
                 <Typography variant="body1" color="textSecondary" sx={{ lineHeight: 1.8 }}>
                   At PropelX, we’re revolutionizing how individuals upskill and prepare for the
