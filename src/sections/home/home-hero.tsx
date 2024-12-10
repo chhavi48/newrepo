@@ -110,16 +110,8 @@ const HomePage = () => {
               About Us
             </Typography>
             <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} md={6}>
-                <CardMedia
-                  component="img"
-                  height="400"
-                  image="https://private-user-images.githubusercontent.com/77965216/393945920-c54431a8-0877-4ca2-be95-332704ef0470.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM3NjY4NjgsIm5iZiI6MTczMzc2NjU2OCwicGF0aCI6Ii83Nzk2NTIxNi8zOTM5NDU5MjAtYzU0NDMxYTgtMDg3Ny00Y2EyLWJlOTUtMzMyNzA0ZWYwNDcwLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjA5VDE3NDkyOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTA5ZjZhYjU4NzUyYWQwMDAyNTQ3NDk5MWY5Y2ExOTg2NWYzMDY5MmQ2MzllODRiN2QzZDlhM2FlMjhjNjE3MDEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.9RhAneatoY2ndZllVPO39hHUiEp3Z6jy4LpNRWKKAwA"
-                  alt="About us"
-                  sx={{ borderRadius: 2 }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
+            
+              <Grid item xs={12} md={12}>
                 <Typography variant="body1" color="textSecondary" sx={{ lineHeight: 1.8 }}>
                   At PropelX, we’re revolutionizing how individuals upskill and prepare for the
                   workforce. By combining AI-powered personalized learning paths, real-world proof
