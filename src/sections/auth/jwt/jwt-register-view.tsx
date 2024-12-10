@@ -12,14 +12,13 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 import { useRouter, useSearchParams } from 'src/routes/hooks';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useNavigate } from 'react-router';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +28,7 @@ export default function JwtRegisterView() {
   const searchParams = useSearchParams();
   const returnTo = searchParams.get('returnTo');
   const password = useBoolean();
+  const navigate = useNavigate();
 
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
@@ -89,6 +89,10 @@ export default function JwtRegisterView() {
     }
   });
 
+  const handleLoginClick = () => {
+    navigate('/login-page');
+  };
+
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 1, position: 'relative' }}>
       <Typography variant="h4">Get started with PropelX</Typography>
@@ -96,9 +100,13 @@ export default function JwtRegisterView() {
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2"> Already have an account? </Typography>
 
-        <Link href={paths.auth.jwt.login} component={RouterLink} variant="subtitle2">
+        <Typography
+          sx={{ color: 'blue', cursor: 'pointer' }}
+          onClick={handleLoginClick}
+          variant="subtitle2"
+        >
           Sign in
-        </Link>
+        </Typography>
       </Stack>
     </Stack>
   );

@@ -47,7 +47,7 @@ export default function Header() {
         }}
       >
         <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
-        <Typography>PropelX Club</Typography>
+          <Typography>PropelX Club</Typography>
 
           <Box sx={{ flexGrow: 1 }} />
 
@@ -58,7 +58,7 @@ export default function Header() {
               Purchase Now
             </Button> */}
 
-            {mdUp && <LoginButton />}
+            <LoginButton />
             {/* {mdUp && <Sig />} */}
 
             {/* <SettingsButton
@@ -68,7 +68,7 @@ export default function Header() {
               }}
             /> */}
 
-            {!mdUp && <NavMobile data={navConfig} />}
+            {/* {!mdUp && <NavMobile data={navConfig} />} */}
           </Stack>
         </Container>
       </Toolbar>

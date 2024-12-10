@@ -10,6 +10,11 @@ export const navConfig = [
     icon: <Iconify icon="solar:home-2-bold-duotone" />,
     path: paths.auth.jwt.login,
   },
+  {
+    title: 'Signup',
+    icon: <Iconify icon="solar:home-2-bold-duotone" />,
+    path: paths.auth.jwt.register,
+  },
   // Uncomment and use as needed:
 
   // {
