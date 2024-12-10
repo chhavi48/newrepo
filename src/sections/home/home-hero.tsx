@@ -1,133 +1,139 @@
-import { Box, Grid, Button, Container, Typography } from '@mui/material';
+import { Box, Grid, Button, Container, Typography, Card, CardMedia } from '@mui/material';
 
 const HomePage = () => {
-  console.log('home');
+  console.log('homepage');
   return (
-    <Container maxWidth="lg" sx={{ py: 5 }}>
-      {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mt: 10 }}>
-        <Typography variant="h3" gutterBottom>
-          Be the top 1%
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          Create your portfolio the way companies want to see
-        </Typography>
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-          Try For Free
-        </Button>
-      </Box>
+    <Grid container sx={{ justifyContent: 'center' }}>
+      <Grid item md={10} lg={10} xs={12}>
+        <Container maxWidth="lg" sx={{ py: 5 }}>
+          {/* Header Section */}
+          <Box sx={{ textAlign: 'center', mt: 10 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{ fontWeight: 'bold', color: 'primary.main' }}
+            >
+              Be the Top 1%
+            </Typography>
+            <Typography variant="subtitle1" sx={{ mb: 3, color: 'text.secondary' }}>
+              Create a portfolio that companies want to see
+            </Typography>
+            <Button variant="contained" color="primary">
+              Try For Free
+            </Button>
+          </Box>
 
-      {/* Boxes Row */}
-      {/* <Grid container spacing={2} justifyContent="center" sx={{ mt: 5 }}>
-        <Grid item xs={12} sm={4} md={3}>
-          <Paper
-            elevation={3}
-            sx={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            Box 1
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Paper
-            elevation={3}
-            sx={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            Box 2
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Paper
-            elevation={3}
-            sx={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            Box 3
-          </Paper>
-        </Grid>
-      </Grid> */}
-
-      {/* Story Section */}
-      <Grid container spacing={2} sx={{ justifyContent: 'center', mt: 4 }}>
-        <Grid md={8} lg={8} xs={12}>
-          <Box sx={{ textAlign: 'center', mb: 5, mt: 4 }}>
-            <Typography variant="h5" gutterBottom>
+          {/* Our Story Section */}
+          <Box sx={{ mt: 8, textAlign: 'center' }}>
+            <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
               Our Story
             </Typography>
-            <Typography variant="body1" color="textSecondary">
-              PropelX was born from a simple yet powerful realization: the disconnect between
-              academic training and real-world job requirements leaves countless talented
-              individuals underprepared for the workforce. Founded by a team of professionals with a
-              shared passion for innovation, education, and employability, PropelX aims to transform
-              how skills are built, validated, and presented. We envisioned a platform where
-              students are not just taught but equipped with tangible proof of their abilities,
-              making them job-ready from day one. By integrating AI, real-world projects, and
-              data-driven insights, PropelX bridges the gap between potential and performance,
-              offering value to students, colleges, and companies alike.
+            <Typography variant="body1" color="textSecondary" sx={{ lineHeight: 1.8, mb: 4 }}>
+              <b>PropelX was born from a powerful realization:</b> the disconnect between academic
+              training and real-world job requirements leaves countless talented individuals
+              underprepared for the workforce. Our platform equips students with tangible proof of
+              their abilities, making them job-ready from day one. By integrating AI, real-world
+              projects, and data-driven insights, PropelX bridges the gap between potential and
+              performance, offering value to students, colleges, and companies alike.
             </Typography>
           </Box>
 
           {/* Products Section */}
-          <Box sx={{ textAlign: 'center', mt: 5 }}>
-            <Typography variant="h5" gutterBottom>
-              Product
+          <Box sx={{ mt: 8 }}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{ textAlign: 'center', fontWeight: 'bold', mb: 5 }}
+            >
+              Our Products
             </Typography>
-            <Typography variant="body1" color="textSecondary" component="div">
-              <Box sx={{ textAlign: 'left', display: 'inline-block', margin: 'auto' }}>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
-                    1. AI-Powered Learning:
-                  </Typography>{' '}
-                  PropelX designs personalized learning paths that adapt to individual skill levels
-                  and industry trends. - Put the personalised learning snapshot
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
-                    2. Proof of Work:
-                  </Typography>{' '}
-                  Students showcase their skills through validated projects, offering employers
-                  tangible evidence of expertise. - Snapshot of project section
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
-                    3. Pre-Vetted Talent Marketplace:
-                  </Typography>{' '}
-                  Companies access job-ready candidates, saving time and money in the recruitment
-                  process with our very own AI Agent.
-                </Box>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
-                    4. Bridging Gaps:
-                  </Typography>{' '}
-                  We connect job seekers and employers on a unified platform, ensuring seamless
-                  collaboration.
-                </Box>
-                <Box>
-                  <Typography variant="body1" component="span" sx={{ fontWeight: 'bold' }}>
-                    5. Future-Ready Workforce:
-                  </Typography>{' '}
-                  PropelX doesn’t just prepare individuals for jobs; it equips them to thrive in a
-                  rapidly evolving world. - Snapshot of overall profile. At PropelX, we don’t just
-                  create opportunities—we shape the future of employability.
-                </Box>
-              </Box>
-            </Typography>
+            <Grid container spacing={4}>
+              {[
+                {
+                  title: 'AI-Powered Learning',
+                  description:
+                    'Personalized learning paths adapt to individual skill levels and industry trends.',
+                  image:
+                    'https://private-user-images.githubusercontent.com/77965216/393938432-f99d1057-5fdc-407b-8d61-94ba0d7b6c21.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM3NjU3MTIsIm5iZiI6MTczMzc2NTQxMiwicGF0aCI6Ii83Nzk2NTIxNi8zOTM5Mzg0MzItZjk5ZDEwNTctNWZkYy00MDdiLThkNjEtOTRiYTBkN2I2YzIxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjA5VDE3MzAxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWIxZDE3ODM1YzI1YmI5NjRiYmFkYTA3YTRiZWU0NGIwM2Y1Y2I1OTI2YjM1MzBhN2JhNjk4MmZjZmViN2U5NzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.gLxE1jlwUGZtEcECcGt-mv149iK8n-FbIZAr2AemMbM',
+                },
+                {
+                  title: 'Proof of Work',
+                  description:
+                    'Validated projects showcase skills, offering employers tangible evidence of expertise.',
+                  image:
+                    'https://private-user-images.githubusercontent.com/77965216/393943726-37ecbe6f-47f5-4421-904d-e8590cc39eb9.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM3NjY1MjMsIm5iZiI6MTczMzc2NjIyMywicGF0aCI6Ii83Nzk2NTIxNi8zOTM5NDM3MjYtMzdlY2JlNmYtNDdmNS00NDIxLTkwNGQtZTg1OTBjYzM5ZWI5LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjA5VDE3NDM0M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBlMGI4ODQyZTFjYmEwMDhkNzRjZTNhM2MwOGM0MGM2YTZjNjljYmIwZjY1MGMzMDVhNDc1ZmZjZjllYTFmMmMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.AcP5G8ilXF9XsLI8KdU0tRFVJTNsFhjTrdWK-ALBHxk',
+                },
+                {
+                  title: 'Pre-Vetted Talent Marketplace',
+                  description:
+                    'Companies access job-ready candidates, saving time and money with our AI Agent.',
+                  image:
+                    'https://private-user-images.githubusercontent.com/77965216/393943068-dec07663-36f0-467c-892b-2d5394a2a785.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM3NjY1MjMsIm5iZiI6MTczMzc2NjIyMywicGF0aCI6Ii83Nzk2NTIxNi8zOTM5NDMwNjgtZGVjMDc2NjMtMzZmMC00NjdjLTg5MmItMmQ1Mzk0YTJhNzg1LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjA5VDE3NDM0M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPThjMWJlYmMwNmM1M2MwYWJjMDI1OTMzZWFkNDlmYjc0OTJmNjkyYTkzNDU3MDc3NTA0YjE2MGJlYjM4ZWEwMGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.pzIm3iTCziee02LP2flQFstDI1_cijtnJXnClvpFdKs',
+                },
+                {
+                  title: 'Bridging Gaps',
+                  description:
+                    'We connect job seekers and employers on a unified platform for seamless collaboration.',
+                  image: 'https://via.placeholder.com/400x250',
+                },
+                {
+                  title: 'Future-Ready Workforce',
+                  description:
+                    'We prepare individuals to thrive in a rapidly evolving world with dynamic profiles.',
+                  image: 'https://via.placeholder.com/400x250',
+                },
+              ].map((product, index) => (
+                <Grid item xs={12} md={6} key={index}>
+                  <Card sx={{ boxShadow: 3 }}>
+                    {/* <CardMedia component="img" height="200" image={product.image} alt={product.title} /> */}
+                    <Box sx={{ p: 2 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+                        {product.title}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {product.description}
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
           </Box>
 
           {/* About Us Section */}
-          <Box sx={{ textAlign: 'center', mt: 5 }}>
-            <Typography variant="h5" gutterBottom>
+          <Box sx={{ mt: 8 }}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{ textAlign: 'center', fontWeight: 'bold', mb: 5 }}
+            >
               About Us
             </Typography>
-            <Typography variant="body1" color="textSecondary">
-              At PropelX, we’re revolutionizing how individuals upskill and prepare for the
-              workforce. By combining AI-powered personalized learning paths, real-world proof of
-              work, and a pre-vetted talent marketplace, we empower students and professionals to
-              excel in their careers. Our mission is to bridge the gap between education and
-              industry demands, creating a seamless connection between talent and opportunity.
-            </Typography>
+            <Grid container spacing={4} alignItems="center">
+              <Grid item xs={12} md={6}>
+                <CardMedia
+                  component="img"
+                  height="400"
+                  image="https://private-user-images.githubusercontent.com/77965216/393945920-c54431a8-0877-4ca2-be95-332704ef0470.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM3NjY4NjgsIm5iZiI6MTczMzc2NjU2OCwicGF0aCI6Ii83Nzk2NTIxNi8zOTM5NDU5MjAtYzU0NDMxYTgtMDg3Ny00Y2EyLWJlOTUtMzMyNzA0ZWYwNDcwLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjA5VDE3NDkyOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTA5ZjZhYjU4NzUyYWQwMDAyNTQ3NDk5MWY5Y2ExOTg2NWYzMDY5MmQ2MzllODRiN2QzZDlhM2FlMjhjNjE3MDEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.9RhAneatoY2ndZllVPO39hHUiEp3Z6jy4LpNRWKKAwA"
+                  alt="About us"
+                  sx={{ borderRadius: 2 }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="body1" color="textSecondary" sx={{ lineHeight: 1.8 }}>
+                  At PropelX, we’re revolutionizing how individuals upskill and prepare for the
+                  workforce. By combining AI-powered personalized learning paths, real-world proof
+                  of work, and a pre-vetted talent marketplace, we empower students and
+                  professionals to excel in their careers. Our mission is to bridge the gap between
+                  education and industry demands, creating a seamless connection between talent and
+                  opportunity.
+                </Typography>
+              </Grid>
+            </Grid>
           </Box>
-        </Grid>
+        </Container>
       </Grid>
-    </Container>
+    </Grid>
   );
 };
 
