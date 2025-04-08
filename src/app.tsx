@@ -22,6 +22,8 @@ import { CheckoutProvider } from 'src/sections/checkout/context';
 
 import { AuthProvider } from 'src/auth/context/jwt';
 import axios from 'axios';
+import { useLocation } from 'react-router';
+import { useEffect, useMemo } from 'react';
 // import { AuthProvider } from 'src/auth/context/auth0';
 // import { AuthProvider } from 'src/auth/context/amplify';
 // import { AuthProvider } from 'src/auth/context/firebase';
@@ -36,17 +38,25 @@ export default function App() {
   useScrollToTop();
 
   console.log(axios.defaults.baseURL, 'baseUrl');
+  const location = useLocation();
+
+  // 🔁 Redirect to Wix site on root "/"
+  // useEffect(() => {
+  //   if (location.pathname === '/') {
+  //     window.location.href = 'https://sachinmy123.wixstudio.com/propx';
+  //   }
+  // }, [location.pathname]);
 
   return (
     <AuthProvider>
       <LocalizationProvider>
         <SettingsProvider
           defaultSettings={{
-            themeMode: 'dark', // 'light' | 'dark'
-            themeDirection: 'ltr', //  'rtl' | 'ltr'
-            themeContrast: 'default', // 'default' | 'bold'
-            themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
-            themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
+            themeMode: 'dark',
+            themeDirection: 'ltr',
+            themeContrast: 'default',
+            themeLayout: 'vertical',
+            themeColorPresets: 'default',
             themeStretch: false,
           }}
         >
@@ -57,7 +67,20 @@ export default function App() {
                   <SettingsDrawer />
                   <ProgressBar />
 
-                  <Router />
+                  {/* Wix iframe if path === '/' */}
+                  {useMemo(() => {
+                    if (location.pathname === '/') {
+                      return (
+                        <iframe
+                          src="https://sachinmy123.wixstudio.com/propx"
+                          style={{ width: '100%', height: '100vh', border: 'none' }}
+                          title="Wix Site"
+                        />
+                      );
+                    }
+
+                    return <Router />;
+                  }, [location.pathname])}
                 </CheckoutProvider>
               </SnackbarProvider>
             </MotionLazy>
