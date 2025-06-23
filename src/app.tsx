@@ -68,7 +68,7 @@ export default function App() {
                   <ProgressBar />
 
                   {/* Wix iframe if path === '/' */}
-                  {useMemo(() => {
+{/*                   {useMemo(() => {
                     if (location.pathname === '/') {
                       return (
                         <iframe
@@ -78,7 +78,7 @@ export default function App() {
                         />
                       );
                     }
-
+ */}
                     return <Router />;
                   }, [location.pathname])}
                 </CheckoutProvider>
